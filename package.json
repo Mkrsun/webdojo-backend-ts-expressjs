@@ -1,0 +1,47 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "ts-node ./src/server.ts",
+    "test": "jest --config jest.config.ts",
+    "build": "tsc",
+    "db:create": "node ./src/scripts/createDb.js",
+    "migration:new": "node ./src/scripts/createMigration.mjs",
+    "migration:lts": "knex migrate:latest",
+    "migration:up": "npx knex migrate:up",
+    "migration:down": "npx knex migrate:down",
+    "migration:rollback": "npx knex migrate:rollback",
+    "seed:new": "node ./src/scripts/createSeed.mjs",
+    "seed:all": "npx knex seed:run",
+    "seed:specific:example": "npx knex seed:run --specific 20240425154113_add-first-point-type-to-review-point-type.js",
+    "docker:db:create": "docker-compose exec app npm run db:create",
+    "docker:db:migration:new": "docker-compose exec app npm run migration:new",
+    "docker:db:migration:lts": "docker-compose exec app npm run migration:lts",
+    "docker:db:migration:up": "docker-compose exec app npm run migration:up",
+    "docker:db:migration:down": "docker-compose exec app npm run migration:down",
+    "docker:db:seed:new": "docker-compose exec app npm run seed:new",
+    "docker:db:seed:all": "docker-compose exec app npm run migration:lts"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "knex": "^3.1.0",
+    "morgan": "~1.9.1",
+    "mysql2": "^3.10.1"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.7",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/knex": "^0.16.1",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.14.8",
+    "inquirer": "^9.2.23",
+    "ts-jest": "^29.1.5",
+    "ts-node": "^10.9.2"
+  }
+}

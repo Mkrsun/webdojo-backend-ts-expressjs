@@ -1,0 +1,1 @@
+-- Aquí va el SQL de la migración UP
