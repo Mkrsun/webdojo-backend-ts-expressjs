@@ -3,7 +3,7 @@ const knex = require('knex')(require('../../../knexfile.js'));
 const path = require('path');
 const fs = require('fs');
 
-const sqlPathUp = './sql/20240425155738_add-review-type-base-up.sql';
+const sqlPathUp = './sql/20240623205315_profile-statuses-seed-up.sql';
 
 // New change
 exports.seed = async function () {

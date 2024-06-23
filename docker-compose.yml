@@ -5,6 +5,7 @@ services:
     build: .
     ports:
       - "${PORT}:${PORT}"
+      - "9229:9229"
     environment:
       - PORT=${PORT}
       - DB_HOST=${DB_HOST}

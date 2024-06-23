@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "ts-node ./src/server.ts",
+    "start:dev": "nodemon --watch src --ext ts,js --exec ts-node src/server.ts",
     "test": "jest --config jest.config.ts",
     "build": "tsc",
     "db:create": "node ./src/scripts/createDb.js",
@@ -15,13 +16,15 @@
     "seed:new": "node ./src/scripts/createSeed.mjs",
     "seed:all": "npx knex seed:run",
     "seed:specific:example": "npx knex seed:run --specific 20240425154113_add-first-point-type-to-review-point-type.js",
+    "docker:start": "docker-compose exec app npm run start",
+    "docker:start:dev": "docker-compose exec app npm run start:dev",
     "docker:db:create": "docker-compose exec app npm run db:create",
     "docker:db:migration:new": "docker-compose exec app npm run migration:new",
     "docker:db:migration:lts": "docker-compose exec app npm run migration:lts",
     "docker:db:migration:up": "docker-compose exec app npm run migration:up",
     "docker:db:migration:down": "docker-compose exec app npm run migration:down",
     "docker:db:seed:new": "docker-compose exec app npm run seed:new",
-    "docker:db:seed:all": "docker-compose exec app npm run migration:lts"
+    "docker:db:seed:all": "docker-compose exec app npm run seed:all"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -29,7 +32,10 @@
     "debug": "~2.6.9",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
     "knex": "^3.1.0",
+    "migrate-mongo": "^11.0.0",
+    "mongodb": "^6.7.0",
     "morgan": "~1.9.1",
     "mysql2": "^3.10.1"
   },
@@ -41,7 +47,9 @@
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.14.8",
     "inquirer": "^9.2.23",
+    "nodemon": "^3.1.4",
     "ts-jest": "^29.1.5",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.2"
   }
 }

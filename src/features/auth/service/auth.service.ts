@@ -25,8 +25,10 @@ const signup = async (email: string, password: string) => {
 
   const hashedPassword = await hashPassword(password);
 
+  const initialUsername = email.split("@")[0] ?? email;
+
   // Create a new user
-  AuthRepo.createUser(email, hashedPassword);
+  AuthRepo.createUser(email, initialUsername, hashedPassword);
 };
 const AuthService = {
   signup,

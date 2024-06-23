@@ -17,10 +17,10 @@ RUN npm install -g nodemon ts-node
 COPY . .
 
 # Expone el puerto en el que la aplicación correrá
-EXPOSE 3737
+EXPOSE 3737 9229
 
 # Define la variable de entorno para el puerto
 ENV PORT=3737
 
 # Comando por defecto para correr la aplicación en modo desarrollo
-CMD ["nodemon", "--watch", "src", "--ext", "ts,js", "--exec", "ts-node", "src/server.ts"]
+CMD ["nodemon", "--watch", "src", "--ext", "ts,js", "--exec", "node --inspect=0.0.0.0:9229 -r ts-node/register", "src/server.ts"]
