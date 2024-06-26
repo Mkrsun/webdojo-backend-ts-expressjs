@@ -12,14 +12,6 @@ describe("MysqlRepository", () => {
     jest.clearAllMocks();
   });
 
-  describe("escapeQuery", () => {
-    it("should escape the query correctly", () => {
-      const query = "SELECT * FROM users;\n\t";
-      const escapedQuery = mysqlRepository.escapeQuery(query);
-      expect(escapedQuery).toBe("SELECT  FROM users");
-    });
-  });
-
   describe("executeQueryRO", () => {
     it("should execute a read-only query with values", async () => {
       const query = "SELECT * FROM users WHERE id = ?";
@@ -30,7 +22,7 @@ describe("MysqlRepository", () => {
 
       const result = await mysqlRepository.executeQueryRO(query, values);
       expect(MysqlPoolRO.query).toHaveBeenCalledWith(
-        "SELECT  FROM users WHERE id = ?",
+        "SELECT * FROM users WHERE id = ?",
         values
       );
       expect(result).toBe(mockResult);
@@ -59,7 +51,7 @@ describe("MysqlRepository", () => {
         mysqlRepository.executeQueryRO(query, values)
       ).rejects.toThrow(InternalServerError);
       expect(MysqlPoolRO.query).toHaveBeenCalledWith(
-        "SELECT  FROM users WHERE id = ?",
+        "SELECT * FROM users WHERE id = ?",
         values
       );
     });

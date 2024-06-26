@@ -3,21 +3,13 @@ import { DbRepository } from "../dbRepository";
 import { InternalServerError } from "../../error";
 
 class MysqlRepository implements DbRepository {
-  escapeQuery = (query: string): string => {
-    return query
-      .replaceAll("\n", "")
-      .replaceAll("\t", "")
-      .replaceAll("*", "")
-      .replaceAll(";", "");
-  };
   executeQueryRO = async (query: string, values?: any[]): Promise<any> => {
     try {
-      const escapedQuery = this.escapeQuery(query);
       let result;
       if (values) {
-        [result] = await MysqlPoolRO.query(escapedQuery, values);
+        [result] = await MysqlPoolRO.query(query, values);
       } else {
-        [result] = await MysqlPoolRO.query(escapedQuery);
+        [result] = await MysqlPoolRO.query(query);
       }
       return result;
     } catch (error) {
@@ -29,8 +21,7 @@ class MysqlRepository implements DbRepository {
 
   public async executeQueryRW(query: string, values: any[]): Promise<any> {
     try {
-      const escapedQuery = this.escapeQuery(query);
-      const [result] = await MysqlPoolRW.query(escapedQuery, values);
+      const [result] = await MysqlPoolRW.query(query, values);
       return result;
     } catch (error) {
       throw new InternalServerError(

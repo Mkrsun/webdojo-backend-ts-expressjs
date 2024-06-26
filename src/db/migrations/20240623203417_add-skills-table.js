@@ -3,8 +3,8 @@ const knex = require('knex')(require('../../../knexfile.js'));
 const path = require('path');
 const fs = require('fs');
 
-const sqlPathUp = './sql/20240622153743_user-table-up.sql';
-const sqlPathDown = './sql/20240622153743_user-table-down.sql';
+const sqlPathUp = './sql/20240623203417_add-skills-table-up.sql';
+const sqlPathDown = './sql/20240623203417_add-skills-table-down.sql';
 
 // New change
 exports.up = async function () {
