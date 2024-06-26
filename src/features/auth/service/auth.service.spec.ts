@@ -2,7 +2,7 @@ import AuthService from "./auth.service";
 import AuthRepo from "../repository/auth.repo";
 import { BadRequest } from "../../../error";
 import isStrongPassword from "../../../utils/validator/isStrongPassword";
-import hashPassword from "../../../utils/passwordEncryptor";
+import { hashPassword } from "../../../utils/passwordEncryptor";
 
 jest.mock("./auth.repo");
 jest.mock("../../utils/validator/isStrongPassword");

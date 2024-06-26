@@ -42,7 +42,7 @@ describe("AuthRepo", () => {
         undefined
       );
 
-      await AuthRepo.createUser("user@example.com", "hashedPassword");
+      await AuthRepo.createUser("user@example.com", "user", "hashedPassword");
       expect(dbRepositoryInstance.executeQueryRW).toHaveBeenCalledWith(
         "INSERT INTO users (email, password) VALUES (?, ?)",
         ["user@example.com", "hashedPassword"]
@@ -55,7 +55,7 @@ describe("AuthRepo", () => {
       );
 
       await expect(
-        AuthRepo.createUser("user@example.com", "hashedPassword")
+        AuthRepo.createUser("user@example.com", "user", "hashedPassword")
       ).rejects.toThrow("DB error");
       expect(dbRepositoryInstance.executeQueryRW).toHaveBeenCalledWith(
         "INSERT INTO users (email, password) VALUES (?, ?)",
